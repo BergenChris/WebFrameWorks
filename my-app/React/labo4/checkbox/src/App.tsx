@@ -1,28 +1,63 @@
 import { useState } from 'react';
-import "./styles.css";
-import './App.css'
+
+
+enum Label { Show, Hide };
+interface CheckBoxProps{
+  label:Label;
+}
+const Checkbox = ({label}:CheckBoxProps) => {
+  const [visibility,setVisibility] = useState(label === Label.Hide);
+  return (
+    <>
+      <label
+        style={{
+          position: "absolute",
+          top: "10px",
+          left: "10px",
+          backgroundColor: "rgba(255, 255, 255, 0.7)",
+          padding: "5px",
+          borderRadius: "4px",
+          zIndex: 1
+        }}
+      >
+        <input
+          type="checkbox"
+          onChange={(e) => setVisibility(e.target.checked)}
+          checked={visibility}
+        />
+        Show/Hide
+      </label>
+      {visibility && (
+        
+        <div
+          style={{
+            width: "100vw", // or a fixed value like "600px"
+            height: "100vh",
+            padding: "5px",
+            backgroundImage:
+              'url("https://media.tenor.com/yheo1GGu3FwAAAAM/rick-roll-rick-ashley.gif")',
+            backgroundSize: "auto", // keeps original size
+            backgroundRepeat: "repeat", // repeat the image
+            backgroundPosition: "top left", // optional
+          }}
+        ></div>
+      
+    )}
+  </>
+  )
+}
+
 
 
 const App = () => {
  
-  const [show,setShow] = useState(false);
+  
 
   return (
-    <>
-    <label>
-      <input type="checkbox" onChange={(e)=>setShow(e.target.checked)} checked = {setShow}/>
-      Show/hide 
-    </label>
-
-  <div style ={{border:"1px solid black", height: 400, padding:5,backgroundRepeat : "repeat",backgroundImage : "url("https://media.tenor.com/yheo1GGu3FwAAAAM/rick-roll-rick-ashley.gif&quot"}} >
-
-  </div>
-    
-      
-
-
-    </>
+   <>
+   <Checkbox label={Label.Hide} />
+   </>
   )
 }
 
-export default App
+export default App;

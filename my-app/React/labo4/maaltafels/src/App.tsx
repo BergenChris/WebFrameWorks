@@ -1,35 +1,87 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
+interface MultiplicationTableProps{
+  max:number;
+}
+const MultiplicationTable = ({max}:MultiplicationTableProps) => {
+  return(
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <table border={1} cellPadding={5} style={{ borderCollapse: 'collapse', textAlign: 'center' }}>
+        <Header max={max} />
+        <tbody>
+          {Array.from({ length: max }, (_, i) => (
+            <MultiplicationRow key={i} factor={i + 1} max={max} />
+          ))}
+        </tbody>
+      </table></>
+
   )
 }
 
-export default App
+interface MultiplicationRowProps{
+  factor:number;
+  max:number;
+}
+const MultiplicationRow = ({factor,max}:MultiplicationRowProps) => {
+  return(
+    <>
+    <tr>
+      {/* New td before the row cells, showing the row number */}
+      <td><strong>{factor}</strong></td>
+      
+      {Array.from({ length: max }, (_, i) => (
+        <td key={i}>{factor * (i + 1)}</td>
+      ))}
+    </tr>
+    </>
+
+  )
+}
+interface HeaderProps {
+  max: number;
+}
+
+const Header = ({ max }: HeaderProps) => {
+  return (
+    <thead>
+      <tr>
+        <th></th>
+        {Array.from({ length: max }, (_, i) => (
+          <th key={i}>{i + 1}</th>
+        ))}
+      </tr>
+    </thead>
+  );
+};
+
+
+interface InputProps {
+  number: number;
+  setNumber: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Input = ({ number, setNumber }: InputProps) => {
+  return (
+    <input
+      type="number"
+      value={number}
+      
+      onChange={(e) => setNumber(Number(e.target.value))}
+      min={2}
+      max={10}
+    />
+  );
+};
+
+const App = () => {
+  const [number, setNumber] = useState<number>(5);
+
+  return (
+    <>
+      <Input number={number} setNumber={setNumber} />
+      <MultiplicationTable max={number} />
+    </>
+  );
+};
+
+export default App;

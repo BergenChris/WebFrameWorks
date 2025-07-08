@@ -24,10 +24,13 @@ const MultiplicationRow = ({factor,max}:MultiplicationRowProps) => {
   return(
     <>
     <tr>
-    {Array.from({ length: max }, (_, i) => (
-      <td key={i}>{factor * (i + 1)}</td>
-    ))}
-  </tr>
+      {/* New td before the row cells, showing the row number */}
+      <td><strong>{factor}</strong></td>
+      
+      {Array.from({ length: max }, (_, i) => (
+        <td key={i}>{factor * (i + 1)}</td>
+      ))}
+    </tr>
     </>
 
   )
@@ -40,6 +43,7 @@ const Header = ({ max }: HeaderProps) => {
   return (
     <thead>
       <tr>
+         <th></th>
         {Array.from({ length: max }, (_, i) => (
           <th key={i}>{i + 1}</th>
         ))}
