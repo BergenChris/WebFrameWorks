@@ -1,6 +1,3 @@
 [submodule "ProjectLoL"]
 	path = ProjectLoL
 	url = https://github.com/BergenChris/ReactNativeProjectLoL
-[submodule "WebFrameWorks"]
-	path = WebFrameWorks
-	url = https://github.com/BergenChris/WebFrameWorks
