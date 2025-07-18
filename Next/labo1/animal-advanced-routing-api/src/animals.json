@@ -1,0 +1,20 @@
+{
+    "animals":[
+    {
+        "id":0,
+        "name":"dog",
+        "imgUrl": "https://localhost:3000/dog.webp"
+    },
+    {
+        
+        "id":1,
+        "name":"cat",
+        "imgUrl": "https://localhost:3000/cat.webp"
+    },
+    {
+        "id":2,
+        "name":"hamster",
+        "imgUrl": "https://localhost:3000/hamster.webp"
+    }
+    ]
+}
